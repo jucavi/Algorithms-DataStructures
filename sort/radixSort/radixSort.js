@@ -16,6 +16,7 @@ function mostDigits(arr) {
   return maxDigits;
 }
 
+// only for positive integers numbers
 function radixSort(arr) {
   let maxDigitsCount = mostDigits(arr);
 
