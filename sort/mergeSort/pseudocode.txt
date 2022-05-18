@@ -1,0 +1,47 @@
+BASE: Cualquier lista de cero o un elemento es una lista ordenada.
+
+Trabaja mediante la descomposición de la lista en listas menores, de cero o un elemento de longitud
+
+                                    [9,8,6,3,5,1,2]
+                               [9,8,6,3]        [5,1,2]
+                            [9,8]    [6,3]    [5,1]  [2]
+                          [9]  [8]  [6] [3]  [5] [1] [2]
+
+######### MERGE ##########
+lista1, lista2:= listas ordenadas
+func merge: (lista1, lista2) retorna una nueva lista ordenada
+    listaFinal = []
+    i = j = 0
+    while i < n and j < m, n:= longitud de lista1, m:= longitud de lista2
+        if lista1[i] < lista2[j]
+            listaFinal << lista1[i]
+            i++
+        else
+            listaFinal << lista2[j]
+            j++
+
+    ## si las listas no tinen la misma longitud agregamos
+    ## los elementos de la lista de mayor longitud que no han sido analizados
+    while i < n
+        listaFinal << lista1[i]
+        i++
+
+    while j < m
+        listaFinal << lista2[j]
+        j++
+
+    return listaFinal
+
+
+######### SORT ##########
+func sort: (lista)
+    ## Base case
+    if n <= 1 return lista, n:= longitud de la lista
+
+    ## Divide and Conquer
+    ## Recursividad
+    middle = n // 2
+    left = sort(lista[:middle])
+    right = sort(lista[middle:])
+
+    return merge(left, right)
