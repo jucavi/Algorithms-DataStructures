@@ -5,6 +5,8 @@ def insertion_sort(arr):
             if curr_val < arr[j]:
                 arr[j+1] = arr[j]
                 arr[j] = curr_val
+            else:
+                break
     return arr
 
-print(insertion_sort([12,6,14,1]))
+print(insertion_sort([12,6,4,1]))

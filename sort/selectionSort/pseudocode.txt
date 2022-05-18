@@ -1,0 +1,17 @@
+Similar a bubble sort pero se basa en hallar el minímo de la lista no ordenada
+
+1. Tomamos la primera posición de la lista no ordenada como valor minímo e iteramos
+    sobre la lista para encontrar el minímo, de existir intercambiamos las posisiones.
+
+e:= lista
+for i {0, n-1} n:=a longitud de la lista
+    lowest = i, minímo temporal
+    for j {i+1, n}
+        if e[j] < e[i]: lowest = j
+    if lowest not i: si no coinciden el minímo temporal y el definitivo intercambiamos e[lowest], e[i] = e[i], e[lowest]
+return e
+
+- Menos eficiente que bubble sort, en listas semiordenadas
+
+Time complexity O(n^2)
+Space complexity O(1)

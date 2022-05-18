@@ -1,0 +1,14 @@
+1. Comenzamos por el segundo elemento de la lista
+2. Comparamos con los anteriores, si es menor insertamos en la posición que corresponda.
+
+
+e:= lista
+for i {1, n}
+    current = e[i]
+    for j {0, i-1}
+        if e[i] < e[j]: prondremos una posición por encima de donde nos encontramos el mayor valor e[j], e[j+1] = current, e[j]
+        else break,  recordemos que iteramos sobre una lista ya ordenada
+return e
+
+Time complexity O(n^2)
+Space complexity O(1)
