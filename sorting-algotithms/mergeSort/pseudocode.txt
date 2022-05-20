@@ -45,3 +45,7 @@ func sort: (lista)
     right = sort(lista[middle:])
 
     return merge(left, right)
+
+
+Time complexity: O(nlog(n))
+Space complexity: O(n)

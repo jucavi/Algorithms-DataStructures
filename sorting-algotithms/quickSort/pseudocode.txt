@@ -1,0 +1,2 @@
+Time complexity:  Avg O(nlog(n))         Worst O(n^2)
+Space complexity: O(log(n))
