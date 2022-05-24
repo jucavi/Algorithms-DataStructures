@@ -90,7 +90,7 @@ class SinglyLinkedList:
             return False
         if index == 0:
             return bool(self.unshift(value))
-        if index == (self.length - 1):
+        if index == self.length:
             return bool(self.append(value))
 
         prev_node = self.get_at(index - 1)
