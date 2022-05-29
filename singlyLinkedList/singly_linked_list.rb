@@ -117,9 +117,29 @@ class SinglyLinkedList
             tmp = prev_node.next
             node.next = tmp
             prev_node.next = node
+            @size += 1
             return self
         end
         return nil
+    end
+
+    def remove(index)
+        if index == 0
+            return self.shift
+        end
+
+        if index == @size - 1
+            return self.pop
+        end
+
+        prev_node = node.get(index - 1)
+        if prev_node
+            del_node = prev_node.next
+            prev_node.next = del_node.next
+            @size -= 1
+            return del_node
+        end
+        return  nil
     end
 
     def reverse
