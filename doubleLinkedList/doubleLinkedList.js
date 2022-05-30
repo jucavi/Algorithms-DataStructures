@@ -72,7 +72,7 @@ class DoubleLinkedList {
   }
 
   get(index) {
-    if (!(0 <= index < this.length)) return null;
+    if (index < 0 || index >= this.length) return null;
     let count;
     let current;
     if (Math.floor(this.length / 2) < index) {
@@ -84,7 +84,7 @@ class DoubleLinkedList {
         count--;
       }
     } else {
-      count = 0
+      count = 0;
       current = this.head;
 
       while (count !== index) {
@@ -104,5 +104,53 @@ class DoubleLinkedList {
     return false;
   }
 
+  insert(index, value) {
+    if (index === 0) {
+      return !!this.unshift(value);
+    }
 
+    if (index === this.length) {
+      return !!this.push(value);
+    }
+
+    let current = this.get(index - 1, value);
+    if (current) {
+      let node = new Node(value);
+      node.next = current.next;
+      node.next.previus = node;
+      node.previus = current;
+      current.next = node;
+      this.length++;
+      return true;
+    }
+    return false;
+  }
+
+  remove(index) {
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    let previousNode = this.get(index - 1);
+    if (!previousNode) return undefined;
+
+    let current = previousNode.next;
+    previousNode.next = current.next;
+    previousNode.next.prev = previousNode;
+    this.length--;
+    return current;
+  }
+
+  reverse() {
+    let current = this.head;
+    this.head = this.tail;
+    this.tail = current;
+
+    while (current) {
+      let prev = current.prev;
+      let next = current.next;
+      current.prev = next;
+      current.next = prev;
+      current = current.prev;
+    }
+    return this;
+  }
 }
