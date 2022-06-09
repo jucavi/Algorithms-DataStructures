@@ -54,10 +54,7 @@ class BinarySearchTree:
             elif current.value < value:
                 current = current.right
 
-    def DFS_pre_order(self, current=None, visited=[]):
-        if not self.root in visited:
-            current = self.root
-
+    def DFS_pre_order(self, current, visited=[]):
         if current:
             visited.append(current)
             if current.left: self.DFS_pre_order(current.left, visited)
@@ -65,15 +62,30 @@ class BinarySearchTree:
 
         return visited
 
+    def DFS_post_order(self, current, visited=[]):
+        if current:
+            self.DFS_post_order(current.left)
+            self.DFS_post_order(current.right)
+            visited.append(current)
+        return visited
+
+    def DFS_in_order(self, current, visited=[]):
+        if current:
+            self.DFS_in_order(current.left)
+            visited.append(current)
+            self.DFS_in_order(current.right)
+        return visited
+
+
 
 bst = BinarySearchTree()
-bst.insert(12)
-bst.insert(10)
-bst.insert(14)
-bst.insert(23)
-bst.insert(1)
-bst.insert(15)
-bst.insert(5)
+bst.insert(50)
+bst.insert(20)
+bst.insert(53)
 bst.insert(11)
-bst.insert(13)
-print(bst.DFS_pre_order())
+bst.insert(22)
+bst.insert(52)
+bst.insert(78)
+print(bst.DFS_pre_order(bst.root))
+print(bst.DFS_post_order(bst.root))
+print(bst.DFS_in_order(bst.root))

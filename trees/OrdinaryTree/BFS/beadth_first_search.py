@@ -67,3 +67,14 @@ class BinarySearchTree:
                 if current.right:
                     q.put(current.right)
         return visited
+
+
+bst = BinarySearchTree()
+bst.insert(50)
+bst.insert(20)
+bst.insert(53)
+bst.insert(11)
+bst.insert(22)
+bst.insert(52)
+bst.insert(78)
+print(bst.BFS())
