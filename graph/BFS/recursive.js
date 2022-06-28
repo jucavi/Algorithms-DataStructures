@@ -51,7 +51,63 @@ class Graph {
     delete this.adjacencyList[vertex];
   }
 
-  BFS(vertex) {
-    
+  removeVertex(vertex) {
+    if (!this.adjacencyList[vertex]) return;
+
+    for (let currVertex of this.adjacencyList[vertex])
+      this.removeEdge(currVertex, vertex);
+    delete this.adjacencyList[vertex];
+  }
+
+  deppFirstRecursive(start) {
+    const visited = {};
+    const result = [];
+    const adjacencyList = this.adjacencyList;
+
+    function helper(vertex) {
+      if (!vertex) return null;
+      visited[vertex] = true;
+      result.push(vertex);
+      adjacencyList[vertex].forEach((neighbour) => {
+        if (!visited[neighbour]) return helper(neighbour);
+      });
+    }
+    helper(start);
+    return result;
+  }
+
+  deppFirstIterative(start) {
+    const stack = [];
+    const result = [];
+    const visited = {};
+    stack.push(start);
+
+    while (stack.length > 0) {
+      let vertex = result.pop();
+      if (!visited[vertex]) {
+        visited[vertex] = true;
+        result.push(vertex);
+        stack.push(...this.adjacencyList[vertex]);
+      }
+    }
   }
 }
+
+g = new Graph();
+
+g.addVertex('A');
+g.addVertex('B');
+g.addVertex('C');
+g.addVertex('D');
+g.addVertex('E');
+g.addVertex('F');
+
+g.addEdge('A', 'B');
+g.addEdge('A', 'C');
+g.addEdge('B', 'D');
+g.addEdge('C', 'E');
+g.addEdge('D', 'E');
+g.addEdge('D', 'F');
+g.addEdge('E', 'F');
+
+g.deppFirtsRecursive('A');
