@@ -77,19 +77,35 @@ class Graph {
   }
 
   deppFirstIterative(start) {
-    const stack = [];
+    const stack = [start];
     const result = [];
     const visited = {};
-    stack.push(start);
 
     while (stack.length > 0) {
-      let vertex = result.pop();
+      let vertex = stack.pop();
       if (!visited[vertex]) {
         visited[vertex] = true;
         result.push(vertex);
         stack.push(...this.adjacencyList[vertex]);
       }
     }
+    return result;
+  }
+
+  breadthFirstSearch(start) {
+    const queue = [start];
+    const result = [];
+    const visited = {};
+
+    while (queue.length > 0) {
+      let vertex = queue.shift();
+      if (!visited[vertex]) {
+        visited[vertex] = true;
+        result.push(vertex);
+        queue.push(...this.adjacencyList[vertex]);
+      }
+    }
+    return result;
   }
 }
 
@@ -110,4 +126,16 @@ g.addEdge('D', 'E');
 g.addEdge('D', 'F');
 g.addEdge('E', 'F');
 
-g.deppFirtsRecursive('A');
+
+//        A
+//      /   \
+//     B     C
+//    /       \
+//   D ------  E
+//   \         /
+//     \      /
+//        F
+
+console.log(g.deppFirstRecursive('A')); // [A, B, D, E, C, F]
+console.log(g.deppFirstIterative('A')); // [A, C, E, F, D, B]
+console.log(g.breadthFirstSearch('A')); // [A, B, C, D, E, F]
