@@ -99,3 +99,9 @@ pq.enqueue(new Node('headache', 3));
 pq.enqueue(new Node('flu', 2));
 pq.enqueue(new Node('car accident', 1));
 pq.enqueue(new Node('stab', 1));
+pq.enqueue(new Node('headache1', 3));
+pq.enqueue(new Node('flu1', 2));
+pq.enqueue(new Node('car accident1', 1));
+pq.enqueue(new Node('stab1', 1));
+
+console.log()
