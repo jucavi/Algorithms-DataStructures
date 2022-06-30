@@ -1,11 +1,11 @@
 
 // O(n log(n)) sort cause. USE BINARY HEAP
-class priorityQueue {
+class PriorityQueue {
   constructor() {
     this.values = [];
   }
-  enqueue(val, priority) {
-    this.values.push({ val, priority })
+  enqueue(name, priority) {
+    this.values.push({ name, priority })
     this.sort();
   }
   dequeue() {
@@ -32,7 +32,7 @@ class weightedGraph {
     const previous = {};
     const distances = {};
     const path = [];
-    const nodes = new priorityQueue();
+    const nodes = new PriorityQueue();
 
     // build up initial state
     Object.keys(this.adjacencyList).forEach(vertex => {
@@ -46,7 +46,7 @@ class weightedGraph {
 
     // as long as there is something to visit
     while (nodes.values.length) {
-      let smallest = nodes.dequeue().val;
+      let smallest = nodes.dequeue().name;
       if (smallest === finish) {
         // WE ARE DONE
         // BUILD UP PATH TO RETUTN AT END

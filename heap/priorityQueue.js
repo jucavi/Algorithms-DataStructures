@@ -20,9 +20,10 @@ class PriorityQueue {
   dequeue() {
     let min = this.values[0];
     let last = this.values.pop();
-    if (this.values.length > 0)
+    if (this.values.length > 0) {
       this.values[0] = last
       this.bubbleDown();
+    }
     return min;
   }
 
@@ -38,9 +39,8 @@ class PriorityQueue {
       if (insertedNode.priority >= parentNode.priority) break;
 
       if (insertedNode.priority < parentNode.priority) {
-        let tmpNode = insertedNode;
         this.values[index] = parentNode;
-        this.values[parentIndex] = tmpNode;
+        this.values[parentIndex] = insertedNode;
         index = parentIndex;
       }
     }
@@ -49,12 +49,12 @@ class PriorityQueue {
   bubbleDown() {
     let index = 0
     let size = this.values.length
+    let currNode = this.values[0];
 
     while (index < size) {
       let rightChild, leftChild;
       let leftChildIndex = this.leftChildIndex(index);
       let rightChildIndex = this.rightChildIndex(index);
-      let currNode = this.values[index];
       let swap = null;
 
       if (rightChildIndex < size) {
@@ -66,7 +66,7 @@ class PriorityQueue {
         leftChild = this.values[leftChildIndex];
         if (
           (swap === null && leftChild.priority < currNode.priority) ||
-          (swap !== null && leftChild.priority < leftChild.priority)
+          (swap !== null && leftChild.priority < rightChild.priority)
         ) {
           swap = leftChildIndex;
         }
@@ -95,13 +95,22 @@ class PriorityQueue {
 
 
 pq = new PriorityQueue();
-pq.enqueue(new Node('headache', 3));
-pq.enqueue(new Node('flu', 2));
-pq.enqueue(new Node('car accident', 1));
-pq.enqueue(new Node('stab', 1));
-pq.enqueue(new Node('headache1', 3));
-pq.enqueue(new Node('flu1', 2));
-pq.enqueue(new Node('car accident1', 1));
-pq.enqueue(new Node('stab1', 1));
+console.log(pq.enqueue(new Node('headache', 3)).values);
+console.log(pq.enqueue(new Node('flu', 2)).values);
+console.log(pq.enqueue(new Node('car accident', 1)).values);
+console.log(pq.enqueue(new Node('stab', 1)).values);
+console.log(pq.enqueue(new Node('headache1', 3)).values);
+console.log(pq.enqueue(new Node('flu1', 2)).values);
+console.log(pq.enqueue(new Node('car accident1', 1)).values);
+console.log(pq.enqueue(new Node('stab1', 1)).values);
 
+
+console.log(pq.dequeue())
+console.log(pq.dequeue())
+console.log(pq.dequeue())
+console.log(pq.dequeue())
+console.log(pq.dequeue())
+console.log(pq.dequeue())
+console.log(pq.dequeue())
+console.log(pq.dequeue())
 console.log()
