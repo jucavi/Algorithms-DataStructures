@@ -24,7 +24,7 @@ class SinglyLinkedList {
     return this;
   }
   get(index) {
-    if (!this.head || index < 0 || index >= this.length) return null;
+    if (!this.head || index < 0 || index >= this.length) return undefined;
     let currNode = this.head;
     let currIndex = 0;
     while (currIndex < this.length) {
@@ -32,6 +32,7 @@ class SinglyLinkedList {
       currNode = currNode.next;
       currIndex++;
     }
+    return undefined;
   }
   set(index, val) {
     if (index > this.length) {
@@ -86,6 +87,33 @@ class SinglyLinkedList {
     this.tail.next = tmpSLL.head;
     this.tail = tmpSLL.tail;
     return this;
+  }
+  shift() {
+    if (!this.head) return undefined;
+
+    let removed = this.head;
+
+    if (this.head === this.tail) {
+      this.tail = null;
+    }
+
+    this.head = this.head.next;
+    removed.next = null;
+    this.length--;
+    return removed;
+  }
+  remove(index) {
+    if (!this.head) return undefined;
+    if (index === 0) return this.shift();
+
+    let previusNode = this.get(index - 1);
+    if (!previusNode) return undefined;
+    let removedNode = previusNode.next;
+    previusNode.next = removedNode.next;
+    removedNode.next = null;
+    this.length--;
+
+    return removedNode;
   }
 }
 
