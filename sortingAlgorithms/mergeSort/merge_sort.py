@@ -1,6 +1,3 @@
-from turtle import right
-
-
 def merge(sorted_list1, sorted_list2):
     sorted_list = []
     i = 0
