@@ -72,10 +72,10 @@ class BinarySearchTree {
         queue = [],
         node; // custom queue best aproach
     queue.push(this.root)
-    
+
     while (queue.length) {
-      node = queue.shift()
-      visited.push(node)
+      node = queue.shift();
+      visited.push(node);
       if (node.left) queue.push(node.left);
       if (node.right) queue.push(node.right);
     }
