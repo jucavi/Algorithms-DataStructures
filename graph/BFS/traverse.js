@@ -51,15 +51,7 @@ class Graph {
     delete this.adjacencyList[vertex];
   }
 
-  removeVertex(vertex) {
-    if (!this.adjacencyList[vertex]) return;
-
-    for (let currVertex of this.adjacencyList[vertex])
-      this.removeEdge(currVertex, vertex);
-    delete this.adjacencyList[vertex];
-  }
-
-  deppFirstRecursive(start) {
+  depthFirstRecursive(start) {
     const visited = {};
     const result = [];
     const adjacencyList = this.adjacencyList;
@@ -87,22 +79,6 @@ class Graph {
         visited[vertex] = true;
         result.push(vertex);
         stack.push(...this.adjacencyList[vertex]);
-      }
-    }
-    return result;
-  }
-
-  breadthFirstSearch(start) {
-    const queue = [start];
-    const result = [];
-    const visited = {};
-
-    while (queue.length > 0) {
-      let vertex = queue.shift();
-      if (!visited[vertex]) {
-        visited[vertex] = true;
-        result.push(vertex);
-        queue.push(...this.adjacencyList[vertex]);
       }
     }
     return result;
