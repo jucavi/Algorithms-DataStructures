@@ -50,4 +50,20 @@ class Graph {
     helper(start);
     return result;
   }
+
+  breadthFirstSearch(start) {
+    let visited = {};
+    let queue = [start];
+    let result = [];
+
+    while (queue.length > 0) {
+      let vertex = queue.shift();
+      if (!visited[vertex]) {
+        visited[vertex] = true;
+        result.push(vertex);
+        queue.push(...this.adjacencyList[vertex]);
+      }
+    }
+    return result;
+  }
 }
