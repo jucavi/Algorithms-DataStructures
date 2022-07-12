@@ -50,7 +50,6 @@ class BinarySearchTree {
         }
       }
     } else return 'Please insert a number';
-    se;
   }
   _isLeaf(node) {
     return !(node.left || node.right);

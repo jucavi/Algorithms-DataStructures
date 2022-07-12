@@ -97,8 +97,9 @@ class WeightedGraph extends Graph {
           distance += distances[smallest];
           smallest = previous[smallest];
         }
+        break;
       }
-      if (smallest && distances[smallest] !== Infinity) {
+      if (smallest || distances[smallest] !== Infinity) {
         this.adjacencyList[smallest].forEach(neighbour => {
           let candidate = distances[smallest] + neighbour.weight;
           if (candidate < distances[neighbour.node]) {
@@ -109,36 +110,55 @@ class WeightedGraph extends Graph {
         });
       }
     }
-    return [distance, path.concat(start).reverse()];
+    return [distances[end], [end].concat(path).reverse()];
   }
 }
 
-let wg = new WeightedGraph();
+// let wg = new WeightedGraph();
 
+// wg.addVertex('A');
+// wg.addVertex('Z');
+// wg.addVertex('C');
+// wg.addVertex('D');
+// wg.addVertex('E');
+// wg.addVertex('H');
+// wg.addVertex('Q');
+// wg.addVertex('G');
+
+// wg.addEdge('A', 'Z', 7);
+// wg.addEdge('A', 'C', 8);
+
+// wg.addEdge('Z', 'Q', 2);
+
+// wg.addEdge('C', 'G', 4);
+
+// wg.addEdge('D', 'Q', 8);
+
+// wg.addEdge('E', 'H', 1);
+
+// wg.addEdge('H', 'Q', 3);
+
+// wg.addEdge('Q', 'C', 6);
+
+// wg.addEdge('G', 'Q', 9);
+
+// console.log(wg.Dijkstra('A', 'E'));
+wg = new WeightedGraph();
 wg.addVertex('A');
-wg.addVertex('Z');
+wg.addVertex('B');
 wg.addVertex('C');
 wg.addVertex('D');
 wg.addVertex('E');
-wg.addVertex('H');
-wg.addVertex('Q');
-wg.addVertex('G');
+wg.addVertex('F');
 
-wg.addEdge('A', 'Z', 7);
-wg.addEdge('A', 'C', 8);
+wg.addEdge('A', 'C', 2);
+wg.addEdge('A', 'B', 4);
+wg.addEdge('B', 'E', 3);
+wg.addEdge('C', 'D', 2);
+wg.addEdge('C', 'F', 4);
+wg.addEdge('D', 'E', 3);
+wg.addEdge('D', 'F', 1);
+wg.addEdge('E', 'F', 1);
 
-wg.addEdge('Z', 'Q', 2);
-
-wg.addEdge('C', 'G', 4);
-
-wg.addEdge('D', 'Q', 8);
-
-wg.addEdge('E', 'H', 1);
-
-wg.addEdge('H', 'Q', 3);
-
-wg.addEdge('Q', 'C', 6);
-
-wg.addEdge('G', 'Q', 9);
-
-console.log(wg.Dijkstra('A', 'E'));
+path = wg.Dijkstra('A', 'E');
+console.log(path);
