@@ -33,20 +33,19 @@ class Trie {
     return this;
   }
 
-  findWord(word, index = 0) {
-    // This function will return the node in the trie
-    // which corresponds to the end of the passed in word.
+  // findWord(word, index = 0) {
+  //   // This function will return the node in the trie
+  //   // which corresponds to the end of the passed in word.
 
-    // Be sure to consider what happens if the word is not in this Trie.
-
-    var char = word[index];
-    if (index < word.length - 1 && this.characters[char]) {
-      index += 1;
-      return this.characters[char].findWord(word, index);
-    } else {
-      return this.characters[char];
-    }
-  }
+  //   // Be sure to consider what happens if the word is not in this Trie.
+  //   var char = word[index];
+  //   if (index < word.length - 1 && this.characters[char]) {
+  //     index += 1;
+  //     return this.characters[char].findWord(word, index);
+  //   } else {
+  //     return this.characters[char];
+  //   }
+  // }
 
   getWords(words = [], currentWord = '') {
     // This function will return all the words which are
@@ -67,12 +66,65 @@ class Trie {
     // This function will return all completions
     // for a given prefix.
     // It should use find and getWords.
-    var subTrie = this.find(prefix);
+    var subTrie = this.findWords(prefix);
     if (subTrie) {
       return subTrie.getWords([], prefix);
     } else {
       return [];
     }
   }
-  removeWord(word) {}
+  removeWord(word, index = 0) {
+    if (index === word.length) {
+      this.isWord = false;
+      return;
+    }
+    let char = word[index];
+    if (char && this.characters[char])
+      this.characters[char].removeWord(word, index + 1);
+    else return;
+    if (
+      Object.keys(this.characters[char].characters).length === 0 &&
+      !this.characters[char].isWord
+    )
+      delete this.characters[char];
+  }
+
+  findWord(word, index = 0) {
+    if (index === word.length) {
+      return this;
+      // if (this.isWord) return this;
+    }
+    let char = word[index];
+    if (char && this.characters[char])
+      return this.characters[char].findWord(word, index + 1);
+  }
+
+  getWords(words = [], currentWord = '') {
+    if (this.isWord) words.push(currentWord);
+    for (const char in this.characters) {
+      const iterWord = currentWord + char;
+      this.characters[char].getWords(words, iterWord);
+    }
+    return words;
+  }
+
+  autoComplete(prefix) {
+    const suffixes = this.findWord(prefix);
+    if (!suffixes) return [];
+    return suffixes.getWords([], prefix)
+  }
 }
+
+let t = new Trie();
+t.addWord('fun');
+t.addWord('fast');
+t.addWord('fat');
+t.addWord('fate');
+t.addWord('father');
+
+// console.log(t.findWord(''));
+// console.log(t.findWord('fat').characters);
+// console.log(t.findWord('father').characters);
+// console.log(t.findWord('father').isWord);
+
+console.log(t.autoComplete('fat'));
